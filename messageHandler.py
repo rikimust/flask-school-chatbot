@@ -52,7 +52,7 @@ def get_answer(request_body):
 
 
 def load_modules():
-   files = os.listdir("mysite/commands")
+   files = os.listdir(os.path.join(os.path.dirname(__file__), 'commands'))
    modules = filter(lambda x: x.endswith('.py'), files)
    for m in modules:
        importlib.import_module("commands." + m[0:-3])
