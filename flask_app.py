@@ -1,12 +1,13 @@
 from flask import Flask, request, json
 from settings import token, confirmation_token
 import messageHandler
+import view
 
 app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hello from Flask!'
+    return view.index_page()
 
 @app.route('/', methods=['POST'])
 def processing():
