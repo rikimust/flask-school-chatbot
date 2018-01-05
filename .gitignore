@@ -1,4 +1,5 @@
 ﻿venv/
+.idea/
 __pycache__/
 settings_and_db/
 settings.py
