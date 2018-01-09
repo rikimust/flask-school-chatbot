@@ -34,3 +34,20 @@ def index_page() -> 'html':
                            the_group=group_10b,
                            the_developer=developer,
                            the_sci_advisor=sci_adviser)
+
+def info_page() -> 'html':
+    return render_template('info.html',
+                           the_title='Это основная информация',
+                           the_logo_name=logo_name,
+                           the_main_menu=main_menu,
+                           the_developer=developer,
+                           the_sci_advisor=sci_adviser)
+
+def log_page() -> 'html':
+    return render_template('log.html',
+                           the_title='Это лог',
+                           the_logo_name=logo_name,
+                           the_main_menu=main_menu,
+                           the_developer=developer,
+                           the_sci_advisor=sci_adviser)
+

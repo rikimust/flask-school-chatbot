@@ -121,6 +121,7 @@ body {
 
 
 .main_pic {
+    margin: 20px auto;
     width: 40%;
     border: 6px darkgrey solid;
     border-radius: 5px;
