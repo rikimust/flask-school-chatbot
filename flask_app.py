@@ -6,6 +6,14 @@ import view
 app = Flask(__name__)
 
 
+def log_request(msg):
+    line = ''
+    f = open('requests.log', 'a', encoding='utf-8')
+    for key, value in msg.items():
+        line += '{}: {},'.format(key, value)
+        print(line, file=f)
+    f.close()
+
 @app.route('/index')
 @app.route('/')
 def index_page():
@@ -27,6 +35,7 @@ def processing():
     if data['type'] == 'confirmation':
         return confirmation_token
     elif data['type'] == 'message_new':
+        log_request(data)
         messageHandler.create_answer(data['object'], token)
         return 'ok'
 
