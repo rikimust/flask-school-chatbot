@@ -11,11 +11,11 @@
             <div class="inner">
               <h3 class="masthead-brand">{{ the_logo_name }}</h3>
               <nav class="nav nav-masthead">
-                {% for menu_name in the_main_menu %}
+                {% for menu_item in the_main_menu %}
                   {% if loop.index == 1 %}
-                <a class="nav-link active" href="#">{{ menu_name }}</a>
+                <a class="nav-link active" href="{{ menu_item.addr }}">{{ menu_item.name }}</a>
                   {% else %}
-                <a class="nav-link" href="#">{{ menu_name }}</a>
+                <a class="nav-link" href="{{ menu_item.addr }}">{{ menu_item.name }}</a>
                   {% endif %}
                 {% endfor %}
               </nav>
@@ -26,21 +26,22 @@
             <h1 class="cover-heading">
               {{ the_greetings_title }}
             </h1>
+            <img class="main_pic" src="static/img/ada_main.jpg" width="350">
             <p class="lead">
               {{ the_greetings_msg }}
             </p>
             <p class="lead">
-              <a href="{{ the_group_addr }}" class="btn btn-lg btn-secondary">Перейти в группу {{ the_group_name }}</a>
+              <a href="{{ the_group.addr }}" class="btn btn-lg btn-secondary">Перейти в группу {{ the_group.name }}</a>
             </p>
           </main>
 
           <footer class="mastfoot">
             <div class="inner">
               <p>Разработчик
-                <a href="{{ the_developer_addr }}">
+                <a href="{{ the_developer.addr }}">
                   {{ the_developer_name }}</a>,
                 научный руководитель
-                <a href="{{ the_sci_advisor_addr }}">
+                <a href="{{ the_sci_advisor.addr }}">
                   {{ the_sci_advisor_name }}</a>.</p>
             </div>
           </footer>

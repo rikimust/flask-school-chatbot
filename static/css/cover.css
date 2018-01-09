@@ -120,6 +120,13 @@ body {
 }
 
 
+.main_pic {
+    width: 40%;
+    border: 6px darkgrey solid;
+    border-radius: 5px;
+    box-shadow: 0px 3px 10px #111;
+}
+
 /*
  * Affix and center
  */

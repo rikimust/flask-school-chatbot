@@ -1,13 +1,20 @@
 from flask import render_template
+from collections import namedtuple
 
-group_10a = {"name": "10А физ-мат", "address": "https://vk.com/10schoolbot10"}
-group_10b = {"name": "10Б соц-эконом", "address": "https://vk.com/school10_soceconom"}
-developer = {"name": "Чоп Александр", "address": "https://vk.com/rikimust"}
-sci_adviser = {"name": "Кузьмин Евгений", "address": "https://vk.com/eakuzmin"}
+link = namedtuple('Link', ['name', 'addr'])
+
 logo_name = 'чатбот АДА'
-main_menu = ('Главная', 'Информация', 'Логи')
+title = 'Ада - школьный чатбот'
+group_10a = link("10А физ-мат", "https://vk.com/10schoolbot10")
+group_10b = link("10Б соц-эконом", "https://vk.com/school10_soceconom")
+developer = link("Чоп Александр", "https://vk.com/rikimust")
+sci_adviser = link("Кузьмин Евгений", "https://vk.com/eakuzmin")
+main_menu = (
+    link('Главная', '\\'),
+    link('Информация', '\info'),
+    link('Логи', '\log'))
 greetings = {
-    "title":'Привет, я АДА - чатбот помощник для школьника!',
+    "title": 'Привет, я АДА - чатбот помощник для школьника!',
     "msg": '''
 С моей помощью ты можешь узнать актуальную информацию об
 обучении, а именно расписание уроков, звонки, сведения об учителях
@@ -19,14 +26,11 @@ greetings = {
 
 def index_page() -> 'html':
     return render_template('index.html',
-                           the_title="Ада - школьный чатбот",
+                           the_title=title,
                            the_logo_name=logo_name,
                            the_main_menu=main_menu,
                            the_greetings_title=greetings["title"],
                            the_greetings_msg=greetings["msg"],
-                           the_group_name=group_10b["name"],
-                           the_group_addr=group_10b["address"],
-                           the_developer_name=developer["name"],
-                           the_developer_addr=developer["address"],
-                           the_sci_advisor_name=sci_adviser["name"],
-                           the_sci_advisor_addr=sci_adviser["address"])
+                           the_group=group_10b,
+                           the_developer=developer,
+                           the_sci_advisor=sci_adviser)
