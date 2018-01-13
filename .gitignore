@@ -1,6 +1,7 @@
-﻿venv/
+venv/
 .idea/
 __pycache__/
 settings_and_db/
 settings.py
 data_base.py
+*.log
