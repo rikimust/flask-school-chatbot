@@ -1,4 +1,5 @@
-import csv, os
+import csv
+import os
 from flask import Flask, request, json
 from datetime import datetime, timezone, timedelta
 
@@ -12,12 +13,11 @@ app = Flask(__name__)
 
 
 def log_request(msg: 'vk_message_obj', filename: str='chat-bot/requests.log') -> None:
-    headers = ['date','time','name','body']
+    headers = ['date', 'time', 'name', 'body']
     with open(filename, 'a') as log:
         writer = csv.DictWriter(log, delimiter=';', fieldnames=headers)
         if os.stat(filename).st_size == 0:
             writer.writeheader()
-        # datetime_now = datetime.now(tz=timezone(timedelta(hours=3)))
         dt = datetime.fromtimestamp(msg['date'], tz=timezone(timedelta(hours=3)))
         user = api.users.get(user_id=msg['user_id'])[0]
         formed_line = {

@@ -1,3 +1,4 @@
+import csv
 from flask import render_template
 from collections import namedtuple
 
@@ -24,6 +25,7 @@ greetings = {
 расписания на завтра (или на любой день недели).
 '''}
 
+
 def index_page() -> 'html':
     return render_template('index.html',
                            the_title=title,
@@ -35,6 +37,7 @@ def index_page() -> 'html':
                            the_developer=developer,
                            the_sci_advisor=sci_adviser)
 
+
 def info_page() -> 'html':
     return render_template('info.html',
                            the_title='Это основная информация',
@@ -43,8 +46,16 @@ def info_page() -> 'html':
                            the_developer=developer,
                            the_sci_advisor=sci_adviser)
 
-def log_page() -> 'html':
+
+def log_page(filename: str='requests.log') -> 'html':
+    with open(filename, encoding='utf-8') as log:
+        reader = csv.DictReader(log, delimiter=';')
+        log_req = []
+        for n, line in enumerate(reader):
+            log_req.append(line)
     return render_template('log.html',
+                           the_data=log_req,
+                           the_req_count=n,
                            the_title='Это лог',
                            the_logo_name=logo_name,
                            the_main_menu=main_menu,
