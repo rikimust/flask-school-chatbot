@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa|Jura|Marck+Script');
+
+body {
+	background-color: #edeef0;
+	padding-bottom: 70px;
+}
+h1, h2, h3 {
+	font-family: 'Jura', cursive;
+	font-weight: bold;
+}
+
+/*///////////////////// NAVIGATION /////////////////////*/
+.navbar {
+	background-color: rgb(237, 238, 240);
+	background-image: linear-gradient(to top, #ccc, #fff);
+	border-bottom: 2px solid #333;
+	box-shadow: 0 0 40px #222;
+	margin-bottom: 20px;
+}
+h1.logo {
+	display: inline-block;
+	vertical-align: text-top;
+	padding-top: 13px;
+	height: 1.3em;
+	font-family: 'Marck Script', cursive;
+	font-size: 2em;
+	color: #333;
+}
+@media (max-width: 992px) {
+	h1.logo {
+		display: none;
+	}
+}
+.navbar-nav {
+	font-family: 'Jura', cursive;
+	font-size: 1.4em;
+}
+.navbar-nav>a:hover {
+	text-decoration: underline;
+	text-decoration-color: #333;
+}
+.navbar-nav>a.active {
+    text-decoration: underline;
+	text-decoration-color: #666;
+}
+
+/*///////////////////// CONTENT /////////////////////*/
+.main-content {
+	margin-top: 50px;
+}
+.page-block {
+	background: #fff;
+	border-radius: 2px;
+	box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+	padding: 8px;
+	margin-bottom: 8px;
+}
+@media (min-width: 991px) {
+	.main-content>.container .row > div:not(:first-child) > div {
+		margin-left: 16px;
+	}
+}
+.main-content .card {
+	border: none;
+}
+.main-content .btn {
+	background-color: #e5ebf1;
+	color: #55677d;
+}
+.main-content .btn:hover {
+	background-color:  #dfe6ed;
+}
+.log {
+	margin: 0;
+	padding: 10px;
+	background: #fff;
+	border-radius: 2px;
+	box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+}
+
+/*///////////////////// FOOTER /////////////////////*/
+.sticky-footer {
+    position: fixed;
+    bottom: -20px;
+    width: 100%;
+    height: 60px;
+    margin: 0;
+    line-height: 60px;
+    background-color: rgb(237, 238, 240);
+	background-image: linear-gradient(to top, #ccc, #fff);
+	margin-bottom: 20px;
+}

@@ -40,6 +40,10 @@ def info_page() -> 'html':
 def log_page() -> 'html':
     return view.log_page()
 
+@app.route('/commands')
+def commands_page() -> 'html':
+    return view.commands_page()
+
 @app.route('/', methods=['POST'])
 def processing() -> str:
     data = json.loads(request.data)
