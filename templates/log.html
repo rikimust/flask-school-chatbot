@@ -2,15 +2,15 @@
 
 {% block main_content %}
 
-<main role="main" class="inner cover">
-    <h2 class="cover-heading">
+<div class="container">
+  <main class="log">
+    <h3>
         Количество записей: {{ the_req_count+1 }}
-    </h2>
-    <div class="log-table">
-        <table class="table table-dark table-hover table-striped">
-            <thead class="thead-light">
+    </h3>
+        <table class="table table-hover table-striped table-sm">
+            <thead class="thead-dark">
                 <tr>
-                    <th>Номер</th>
+                    <th>#</th>
                     <th>Дата</th>
                     <th>Время</th>
                     <th>Пользователь</th>
@@ -20,7 +20,7 @@
             <tbody>
             {% for line in the_data %}
                 <tr>
-                    <td>{{ loop.index }}</td>
+                    <td>{{ the_req_count+2-loop.index }}</td>
                     <td>{{ line['date'] }}</td>
                     <td>{{ line['time'] }}</td>
                     <td>{{ line['name'] }}</td>
@@ -29,7 +29,7 @@
             {% endfor %}
             </tbody>
         </table>
-    </div>
-</main>
+    </main>
+</div>
 
 {% endblock %}

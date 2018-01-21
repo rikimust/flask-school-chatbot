@@ -2,45 +2,47 @@
 
 {% block body %}
 
-<div class="site-wrapper">
 
-      <div class="site-wrapper-inner">
-        <div class="cover-container">
+    <nav class="navbar sticky-top navbar-expand-sm navbar-light">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="static/img/logo-1.png" width="82" height="45" alt="Ада лого">
+        </a> 
+        <h1 class="logo">{{ the_logo_name }}</h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-          <header class="masthead clearfix">
-            <div class="inner">
-              <h3 class="masthead-brand">{{ the_logo_name }}</h3>
-              <nav class="nav nav-masthead">
-                {% for menu_item in the_main_menu %}
-                  {% if loop.index == 1 %}
-                <a class="nav-link active" href="{{ menu_item.addr }}">{{ menu_item.name }}</a>
-                  {% else %}
-                <a class="nav-link" href="{{ menu_item.addr }}">{{ menu_item.name }}</a>
-                  {% endif %}
-                {% endfor %}
-              </nav>
-            </div>
-          </header>
-
-          {% block main_content %}
-
-
-          {% endblock %}
-
-          <footer class="mastfoot">
-            <div class="inner">
-              <p>Разработчик
-                <a href="{{ the_developer.addr }}">
-                  {{ the_developer.name }}</a>,
-                научный руководитель
-                <a href="{{ the_sci_advisor.addr }}">
-                  {{ the_sci_advisor.name }}</a>.</p>
-            </div>
-          </footer>
-
+        <div class="collapse navbar-collapse " id="navbarNav">
+          <div class="navbar-nav ml-auto w-100 justify-content-end">
+			{% for menu_item in the_main_menu %}
+				{% if loop.index == the_active_page %}
+              <a class="nav-item nav-link active" href="{{ menu_item.addr }}">{{ menu_item.name }}</a>
+				{% else %}
+			  <a class="nav-item nav-link" href="{{ menu_item.addr }}">{{ menu_item.name }}</a>
+				{% endif %}
+			{% endfor %}
+          </div>
         </div>
       </div>
+    </nav>
 
-</div>
+	{% block main_content %}
 
+
+    {% endblock %}
+	
+	<footer class="footer-content sticky-footer">
+      <div class="container">
+        <div class="developers d-flex justify-content-center">
+          <p>
+            Разработчик
+            <a href="{{ the_developer.addr }}">{{ the_developer.name }}</a>,
+            научный руководитель
+            <a href="{{ the_sci_advisor.addr }}">{{ the_sci_advisor.name }}</a>.
+          </p>
+        </div>
+      </div>
+    </footer>
+	
 {% endblock %}
