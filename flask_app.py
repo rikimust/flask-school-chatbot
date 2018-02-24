@@ -37,8 +37,8 @@ def info_page() -> 'html':
     return view.info_page()
 
 @app.route('/log')
-def log_page() -> 'html':
-    return view.log_page()
+def log_page(methods=['GET']) -> 'html':
+    return view.log_page(request.args.get('page', 'last'))
 
 @app.route('/commands')
 def commands_page() -> 'html':

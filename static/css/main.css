@@ -53,10 +53,11 @@ h1.logo {
 .main-content {
 	margin-top: 50px;
 }
-.container {
-    overflow-x: hidden;
+main .container section {
+    overflow-x: scroll;
 }
 .page-block {
+    overflow-x: scroll;
     width: 100%;
 	background: #fff;
 	border-radius: 2px;
@@ -86,7 +87,17 @@ h1.logo {
 	border-radius: 2px;
 	box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
 }
-
+.pagination {
+    margin-top: 10px;
+}
+.pag {
+    overflow-x: scroll;
+}
+.pag h3 {
+    text-align: center;
+    margin-top: 1em;
+    font-size: 0.9em;
+}
 /*///////////////////// FOOTER /////////////////////*/
 .sticky-footer {
     position: absolute;

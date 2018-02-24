@@ -75,9 +75,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                {% set begin = the_req_count - (the_req_count//the_row_on_page - the_page)*the_row_on_page %}
                 {% for line in the_data %}
                     <tr>
-                        <td>{{ the_req_count+1-loop.index }}</td>
+                        <td>{{ begin - loop.index + 1 }}</td>
                         <td>{{ line['date'] }}</td>
                         <td>{{ line['time'] }}</td>
                         <td>{{ line['name'] }}</td>
@@ -87,6 +88,70 @@
                 </tbody>
             </table>
         </section>
+    </div>
+
+    <div class="container">
+        <nav class="pag">
+            <h3>Страница {{ the_page }} из {{ the_req_count // the_row_on_page }}</h3>
+            <ul class="pagination justify-content-center">
+            {% if the_page == the_req_count // the_row_on_page %}
+                {% set first="disabled" %}
+            {% else %}
+                {% set first="" %}
+            {% endif %}
+                <li class="page-item {{ first }}">
+                <a class="page-link" href="?page={{ the_req_count // the_data|count }}">
+                        Последняя
+                    </a>
+                </li>
+                <li class="page-item {{ first }}">
+                    <a class="page-link"
+                       aria-label="Previous"
+                       href="?page={{ the_page+1 }}">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+
+            {% if the_page > the_req_count // the_row_on_page - 5 %}
+                {% set begin=the_req_count // the_row_on_page %}
+            {% elif the_page < 6 %}
+                {% set begin=the_req_count // the_row_on_page - 5 %}
+            {% else %}
+                {% set begin=the_page+5 %}
+            {% endif %}
+            {% for page_num in range(begin, begin-10, -1) %}
+                {% if page_num == the_page %}
+                <li class="page-item active">
+                {% else %}
+                <li class="page-item">
+                {% endif %}
+                    <a class="page-link" href="?page={{ page_num }}">
+                        {{ page_num }}
+                    </a>
+                </li>
+            {% endfor %}
+
+            {% if the_page == 1 %}
+                {% set last = "disabled" %}
+            {% else %}
+                {% set last = "" %}
+            {% endif %}
+                <li class="page-item {{ last }}">
+                    <a class="page-link"
+                       aria-label="Next"
+                       href="?page={{ the_page-1 }}">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+                <li class="page-item {{ last }}">
+                    <a class="page-link" href="?page=1">
+                        Первая
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </main>
 {% endblock %}
