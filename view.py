@@ -60,7 +60,7 @@ def commands_page() -> 'html':
                            the_developer=developer,
                            the_sci_advisor=sci_adviser)
 
-def log_page(filename: str='requests.log') -> 'html':
+def log_page(page, filename: str='requests.log') -> 'html':
     with open(filename, encoding='utf-8') as log:
         reader_dict = csv.DictReader(log, delimiter=';')
         log_req = []
@@ -72,23 +72,30 @@ def log_page(filename: str='requests.log') -> 'html':
             act_usr_dict[line['name']] = \
                 act_usr_dict.get(line['name'], 0) + 1
             log_req.append(line)
-        log_req.reverse()
-        active_users = []
-        for user, count in sorted(act_usr_dict.items(),
-                                  key=lambda x: x[1],
-                                  reverse=True):
-            active_users.append((user, count))
-            if len(active_users) >= 15:
-                break
-        popular_requests = []
-        for request, count in sorted(pop_req_dict.items(),
-                                  key=lambda x: x[1],
-                                  reverse=True):
-            popular_requests.append((request, count))
-            if len(popular_requests) >= 15:
-                break
+    log_req.reverse()
+    active_users = []
+    for user, count in sorted(act_usr_dict.items(),
+                              key=lambda x: x[1],
+                              reverse=True):
+        active_users.append((user, count))
+        if len(active_users) >= 15:
+            break
+    popular_requests = []
+    for request, count in sorted(pop_req_dict.items(),
+                              key=lambda x: x[1],
+                              reverse=True):
+        popular_requests.append((request, count))
+        if len(popular_requests) >= 15:
+            break
+    page = len(log_req) // 25 if page == 'last' else int(page)
+    begin = (len(log_req) // 25 - page) * 25
+    end = (len(log_req) // 25 - page + 1) * 25
+    if page == 1:
+        end = len(log_req)
     return render_template('log.html',
-                           the_data=log_req[:25],
+                           the_page=page,
+                           the_data=log_req[begin:end],
+                           the_row_on_page=25,
                            the_req_count=len(log_req),
                            the_active_users=active_users,
                            the_popular_requests=popular_requests,
