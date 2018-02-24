@@ -2,34 +2,91 @@
 
 {% block main_content %}
 
-<div class="container">
-  <main class="log">
-    <h3>
-        Количество записей: {{ the_req_count+1 }}
-    </h3>
-        <table class="table table-hover table-striped table-sm">
-            <thead class="thead-dark">
-                <tr>
-                    <th>#</th>
-                    <th>Дата</th>
-                    <th>Время</th>
-                    <th>Пользователь</th>
-                    <th>Команда</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for line in the_data %}
-                <tr>
-                    <td>{{ the_req_count+2-loop.index }}</td>
-                    <td>{{ line['date'] }}</td>
-                    <td>{{ line['time'] }}</td>
-                    <td>{{ line['name'] }}</td>
-                    <td>{{ line['body'] }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </main>
-</div>
+<main class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 d-flex align-items-stretch">
+                <section class="page-block">
+                    <h3>
+                        Самые популярные запросы
+                    </h3>
+                    <table class="table table-dark table-hover table-striped table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Запрос</th>
+                                <th>Количество</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for line in the_popular_requests %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ line[0] }}</td>
+                                <td>{{ line[1] }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </section>
+            </div>
 
+            <div class="col-lg-6 d-flex align-items-stretch">
+                <section class="page-block">
+                    <h3>
+                        Самые активные пользователи
+                    </h3>
+                    <table class="table table-dark table-hover table-striped table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Имя</th>
+                                <th>Количество</th>
+                            </tr>
+                        </thead>
+                                            <tbody>
+                        {% for line in the_active_users %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ line[0] }}</td>
+                                <td>{{ line[1] }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+      <section class="log">
+        <h3>
+            Количество записей: {{ the_req_count }}
+        </h3>
+            <table class="table table-hover table-striped table-sm">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Дата</th>
+                        <th>Время</th>
+                        <th>Пользователь</th>
+                        <th>Команда</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for line in the_data %}
+                    <tr>
+                        <td>{{ the_req_count+1-loop.index }}</td>
+                        <td>{{ line['date'] }}</td>
+                        <td>{{ line['time'] }}</td>
+                        <td>{{ line['name'] }}</td>
+                        <td>{{ line['body'] }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+</main>
 {% endblock %}

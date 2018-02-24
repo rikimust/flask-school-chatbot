@@ -2,35 +2,35 @@
 
 {% block main_content %}
 
-	<main class="main-content">
-      <div class="container">
-        
-        <div class="row">
-          <div class="col-lg-5 d-flex align-items-stretch">
-            <div class="page-block">
-              <div class="card">
-                <img class="card-img-top" src="static/img/ada_main.jpg">
-                <div class="card-body d-flex justify-content-center">
-                  <a
-                  href="{{ the_group.addr }}"
-                  class="btn btn-lg">Перейти в группу {{ the_group.name }}</a>
-                </div>
-              </div>
-            </div>
-          </div>
+<main class="main-content">
+  <div class="container">
 
-          <div class="col-lg-7 d-flex align-items-stretch">
-            <div class="page-block px-3">
-              <h2 class="heading">
-                {{ the_greetings_title }}
-              </h2>
-              <p class="lead">
-                {{ the_greetings_msg }}
-              </p>
+    <div class="row">
+      <div class="col-lg-5 d-flex align-items-stretch">
+        <div class="page-block">
+          <div class="card">
+            <img class="card-img-top" src="static/img/ada_main.jpg">
+            <div class="card-body d-flex justify-content-center">
+              <a
+              href="{{ the_group.addr }}"
+              class="btn btn-lg">Перейти в группу {{ the_group.name }}</a>
             </div>
           </div>
         </div>
       </div>
-    </main>
+
+      <div class="col-lg-7 d-flex align-items-stretch">
+        <div class="page-block px-3">
+          <h2 class="heading">
+            {{ the_greetings_title }}
+          </h2>
+          <p class="lead">
+            {{ the_greetings_msg }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
 
 {% endblock %}

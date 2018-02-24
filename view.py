@@ -62,14 +62,36 @@ def commands_page() -> 'html':
 
 def log_page(filename: str='requests.log') -> 'html':
     with open(filename, encoding='utf-8') as log:
-        reader = csv.DictReader(log, delimiter=';')
+        reader_dict = csv.DictReader(log, delimiter=';')
         log_req = []
-        for n, line in enumerate(reader):
+        act_usr_dict = dict()
+        pop_req_dict = dict()
+        for line in reader_dict:
+            pop_req_dict[line['body']] = \
+                pop_req_dict.get(line['body'], 0) + 1
+            act_usr_dict[line['name']] = \
+                act_usr_dict.get(line['name'], 0) + 1
             log_req.append(line)
         log_req.reverse()
+        active_users = []
+        for user, count in sorted(act_usr_dict.items(),
+                                  key=lambda x: x[1],
+                                  reverse=True):
+            active_users.append((user, count))
+            if len(active_users) >= 15:
+                break
+        popular_requests = []
+        for request, count in sorted(pop_req_dict.items(),
+                                  key=lambda x: x[1],
+                                  reverse=True):
+            popular_requests.append((request, count))
+            if len(popular_requests) >= 15:
+                break
     return render_template('log.html',
-                           the_data=log_req,
-                           the_req_count=n,
+                           the_data=log_req[:25],
+                           the_req_count=len(log_req),
+                           the_active_users=active_users,
+                           the_popular_requests=popular_requests,
                            the_title='Это лог',
                            the_logo_name=logo_name,
                            the_main_menu=main_menu,
