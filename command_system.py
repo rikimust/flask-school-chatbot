@@ -19,7 +19,7 @@ class Command:
 
    def __set_aliases(self, aliases_list):
        for alias in aliases_list:
-           self.__keys.append(alias)
+           self.__aliases.append(alias)
 
    keys = property(__get_keys, __set_keys)
    aliases = property(__get_aliases, __set_aliases)
