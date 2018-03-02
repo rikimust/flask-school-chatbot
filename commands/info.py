@@ -10,7 +10,7 @@ def help(keyword=''):
 
 help_command = command_system.Command()
 help_command.keys = keyword_gen('помощь')
-help_command.alias = keyword_gen('помоги', 'help', 'хелп', 'pomosh')
+help_command.aliases = keyword_gen('помоги', 'help', 'хелп', 'pomosh')
 help_command.description = 'Покажу список команд и их описание'
 help_command.process = help
 
@@ -26,6 +26,6 @@ def all_commands(keyword=''):
 
 all_commands_command = command_system.Command()
 all_commands_command.keys = keyword_gen('команды')
-all_commands_command.alisas = keyword_gen('все команды', 'список команд')
+all_commands_command.aliases = keyword_gen('все команды', 'список команд')
 all_commands_command.description = 'Покажу все команды и их псевдонимы'
 all_commands_command.process = all_commands
