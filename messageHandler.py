@@ -61,5 +61,5 @@ def load_modules():
 def create_answer(data, token):
    load_modules()
    user_id = data['user_id']
-   message, attachment = get_answer(data['body'].lower())
+   message, attachment = get_answer(data['body'])
    vkapi.send_message(user_id, token, message, attachment)

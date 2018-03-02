@@ -54,10 +54,10 @@ h1.logo {
 	margin-top: 50px;
 }
 main .container section {
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 .page-block {
-    overflow-x: scroll;
+    overflow-x: auto;
     width: 100%;
 	background: #fff;
 	border-radius: 2px;
@@ -91,7 +91,7 @@ main .container section {
     margin-top: 10px;
 }
 .pag {
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 .pag h3 {
     text-align: center;

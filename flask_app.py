@@ -24,7 +24,7 @@ def log_request(msg: 'vk_message_obj', filename: str='chat-bot/requests.log') ->
             'date': '{:%d.%m.%Y}'.format(dt),
             'time': '{:%H:%M:%S}'.format(dt),
             'name': '{} {}'.format(user['last_name'].title(), user['first_name'].title()),
-            'body': msg['body'] }
+            'body': msg['body'][0].upper() + msg['body'][1:].lower() }
         writer.writerow(formed_line)
 
 @app.route('/index')
