@@ -73,9 +73,9 @@ def get_timetable(keyword=''):
    if keyword in keyword_gen('звонки сегодня','звонки на сегодня','звнксгд'):
       message = get_daily_timetable(time_now, time_now.week_day)
    elif keyword in keyword_gen('звонки завтра','звонки на завтра','звнкзвт'):
-      message = get_daily_timetable(time_now, time_now.week_day+1)
+      message = get_daily_timetable(time_now, (time_now.week_day+1)%7)
    elif keyword in keyword_gen('звонки вчера', 'звонки на вчера', 'звнквчр'):
-      message = get_daily_timetable(time_now, time_now.week_day-1)
+      message = get_daily_timetable(time_now, (time_now.week_day-1)%7)
    elif keyword in keyword_gen('звонки понедельник','звонки на понедельник','звнкпн'):
       message = get_daily_timetable(time_now, 0)
    elif keyword in keyword_gen('звонки вторник','звонки на вторник','звнквт'):
