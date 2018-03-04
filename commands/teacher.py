@@ -1,11 +1,24 @@
 import command_system
 from common_func import keyword_gen
+from humans_db import teachers_list
+
 
 def teacher(keyword=''):
-   message = 'Приветствую!\nРусский яз.; Литература  - Рожкова Елена Викторовна\nМатематика - Попова Светлана Вячеславовна\nФизика - Гасымова Анжелика Евгеньевна\nХимия - Кокорина Светлана Евгеньевна\nИнформатика - Кузьмин Евгений Александрович\nИстория; Обществознание - Канатова Ирина Ивановна\nБиология - Капитанчук Юлия Сергеевна\nГеогрфия - Пухлова Любовь Викторовна\nАнглийский яз. - Бородина Елена Валерьевна\nФизкультура - Картавова Альфия Вагизовна\nМузыка  - Петросян Алла Рафаеловна\nОБЖ - Колбеев Владимир Владимирович'
-   return message, ''
+    message = ''
+    for teacher in sorted(teachers_list, key=lambda t: t.last_name):
+        if not teacher.subject:
+            about = ', '.join(teacher.post)
+        else:
+            about = ', '.join(teacher.subject)
+            other_post = [post for post in teacher.post if post != 'учитель']
+            if other_post != []:
+                about += ', ' + ', '.join(other_post)
+        message += '{} - {}\n'.format(teacher.name, about)
+    return message, ''
+
 
 teacher_command = command_system.Command()
-teacher_command.keys = keyword_gen('учителя','преподаватели', 'преподы')
+teacher_command.keys = keyword_gen('учителя')
+teacher_command.aliases = keyword_gen('педагоги', 'преподаватели', 'преподы')
 teacher_command.description = 'Покажу список учителей'
 teacher_command.process = teacher

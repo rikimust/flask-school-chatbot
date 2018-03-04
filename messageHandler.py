@@ -2,6 +2,7 @@ import vkapi
 import os
 import importlib
 from command_system import command_list
+from common_func import translite
 
 
 def damerau_levenshtein_distance(s1, s2):
@@ -47,7 +48,8 @@ def get_answer(request_body):
                     return message, attachment
     if distance < len(request_body)*0.4:
         message, attachment = target_command.process(target_key)
-        message = 'Вы ошиблись с запросом! Наверное, вы хотели ввести: "%s"\n\n' % target_key + message
+        message = 'Вы ошиблись с запросом! Наверное, вы хотели ввести: \"{}\"\n\n{}'.\
+            format(translite(target_key, 'rus'), message)
     return message, attachment
 
 

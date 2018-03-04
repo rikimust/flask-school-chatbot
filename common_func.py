@@ -11,13 +11,21 @@ class TimeNow:
         self.td = timedelta(hours=self.time.hour, minutes=self.time.minute)
 
 
+def translite(word, lang_to='eng'):
+   table_rus = "ячсмитьбю.фывапролджэйцукенгшщзхъ"
+   table_eng = "zxcvbnm,./asdfghjkl;'qwertyuiop[]"
+   if lang_to == 'eng':
+      table = str.maketrans(table_rus, table_eng)
+   else:
+      table = str.maketrans(table_eng, table_rus)
+   return word.translate(table)
+
+
+
 def keyword_gen(*keywords):
-   table_from = "ячсмитьбю.фывапролджэйцукенгшщзхъ"
-   table_to =   "zxcvbnm,./asdfghjkl;'qwertyuiop[]"
-   table = str.maketrans(table_from, table_to)
    for keyword in keywords:
       yield keyword.lower()
-      yield keyword.lower().translate(table)
+      yield translite(keyword.lower())
 
 
 def get_lesson_number(time_now):

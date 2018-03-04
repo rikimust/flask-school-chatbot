@@ -2,6 +2,9 @@ venv/
 .idea/
 __pycache__*/
 settings_and_db/
+utilities/
+support_files/
 settings.py
 data_base.py
 *.log
+*.csv
