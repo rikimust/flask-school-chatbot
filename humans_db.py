@@ -1,6 +1,7 @@
 from datetime import datetime
-import csv
+import csv, os
 
+cur_dir = os.path.dirname(os.path.abspath(__file__))
 pupils_list = []
 teachers_list = []
 parents_list = []
