@@ -12,7 +12,8 @@ def get_subject_by_lesson(day, lesson_num):
       subject = SCHEDULE[day][lesson_num][1]
    return subject if subject != '' else 'ПУСТО'
 
-def get_lesson(keyword=''):
+
+def get_lesson(keyword='', user_id=''):
    time_now = TimeNow()
    key_day, lesson_num, is_time_change = get_lesson_number(time_now)
    if lesson_num == 'before':
@@ -47,6 +48,7 @@ def get_lesson(keyword=''):
             TIMETABLE[key_day][SHIFT][lesson_num][0],
             get_subject_by_lesson(time_now.week_day, lesson_num))
    return message, ''
+
 
 lessons_command = command_system.Command()
 lessons_command.keys = keyword_gen('урок','урок текущий','текущий урок','уроктек',

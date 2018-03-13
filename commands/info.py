@@ -2,7 +2,7 @@ import command_system
 from common_func import keyword_gen
 
 
-def help(keyword=''):
+def help(keyword='', user_id=''):
     message = ''
     for command in command_system.command_list:
         message += '{} - {}\n'.format(command.keys[0].upper(),
@@ -17,7 +17,7 @@ help_command.description = 'Покажу список команд и их оп�
 help_command.process = help
 
 
-def all_commands(keyword=''):
+def all_commands(keyword='', user_id=''):
     message = ''
     for command in command_system.command_list:
         # все чётные комманды - это транслит на нечётные

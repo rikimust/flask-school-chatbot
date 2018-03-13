@@ -5,7 +5,7 @@ from command_system import command_list
 from common_func import translite
 
 
-def damerau_levenshtein_distance(s1, s2):
+def dl_distance(s1, s2):      # Damerau-Levenshtein distance
     '''return 0 if s1 = s2, else return count of differences'''
     d = {}
     lenstr1 = len(s1)
@@ -30,26 +30,25 @@ def damerau_levenshtein_distance(s1, s2):
     return d[lenstr1 - 1, lenstr2 - 1]
 
 
-def get_answer(request_body):
-    message = "Прости, не понимаю тебя. Напиши 'помощь', чтобы узнать мои команды"
-    attachment = ''
+def get_answer(request_body, user_id):
     distance = len(request_body)
-    target_command = None
-    target_key = ''
     for command in command_list:
         for command_key in command.keys:
-            d = damerau_levenshtein_distance(request_body, command_key)
+            d = dl_distance(request_body, command_key)
             if d < distance:
                 distance = d
                 target_command = command
                 target_key = command_key
                 if distance == 0:
-                    message, attachment = target_command.process(target_key)
+                    message, attachment = target_command.process(target_key, user_id)
                     return message, attachment
     if distance < len(request_body)*0.4:
-        message, attachment = target_command.process(target_key)
+        message, attachment = target_command.process(target_key, user_id)
         message = 'Вы ошиблись с запросом! Наверное, вы хотели ввести: \"{}\"\n\n{}'.\
             format(translite(target_key, 'rus'), message)
+    else:
+        attachment = ''
+        message = "Прости, не понимаю тебя. Напиши 'помощь', чтобы узнать мои команды"
     return message, attachment
 
 
@@ -63,5 +62,5 @@ def load_modules():
 def create_answer(data, token):
    load_modules()
    user_id = data['user_id']
-   message, attachment = get_answer(data['body'])
+   message, attachment = get_answer(data['body'].lower(), data['user_id'])
    vkapi.send_message(user_id, token, message, attachment)

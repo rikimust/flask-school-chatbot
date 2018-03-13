@@ -68,7 +68,7 @@ def get_daily_timetable(time_now, day):
    return message
 
 
-def get_timetable(keyword=''):
+def get_timetable(keyword='', user_id=''):
    time_now = TimeNow()
    if keyword in keyword_gen('звонки сегодня','звонки на сегодня','звнксгд'):
       message = get_daily_timetable(time_now, time_now.week_day)

@@ -10,9 +10,11 @@ import view
 
 
 app = Flask(__name__)
+cur_dir = os.path.dirname(os.path.abspath(__file__))
 
 
-def log_request(msg: 'vk_message_obj', filename: str='chat-bot/requests.log') -> None:
+def log_request(msg: 'vk_message_obj',
+                filename: str=os.path.join(cur_dir, 'requests.log')) -> None:
     headers = ['date', 'time', 'name', 'body']
     with open(filename, 'a') as log:
         writer = csv.DictWriter(log, delimiter=';', fieldnames=headers)
@@ -27,22 +29,27 @@ def log_request(msg: 'vk_message_obj', filename: str='chat-bot/requests.log') ->
             'body': msg['body'][0].upper() + msg['body'][1:].lower() }
         writer.writerow(formed_line)
 
+
 @app.route('/index')
 @app.route('/')
 def index_page() -> 'html':
     return view.index_page()
 
+
 @app.route('/info')
 def info_page() -> 'html':
     return view.info_page()
+
 
 @app.route('/log')
 def log_page(methods=['GET']) -> 'html':
     return view.log_page(request.args.get('page', 'last'))
 
+
 @app.route('/commands')
 def commands_page() -> 'html':
     return view.commands_page()
+
 
 @app.route('/', methods=['POST'])
 def processing() -> str:

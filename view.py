@@ -1,7 +1,8 @@
-import csv
+import csv, os
 from flask import render_template
 from collections import namedtuple
 
+cur_dir = os.path.dirname(os.path.abspath(__file__))
 link = namedtuple('Link', ['name', 'addr'])
 
 logo_name = 'школьный чатбот'
@@ -39,6 +40,7 @@ def index_page() -> 'html':
                            the_developer=developer,
                            the_sci_advisor=sci_adviser)
 
+
 def info_page() -> 'html':
     return render_template('info.html',
                            the_title='''
@@ -51,6 +53,7 @@ def info_page() -> 'html':
                            the_developer=developer,
                            the_sci_advisor=sci_adviser)
 
+
 def commands_page() -> 'html':
     return render_template('info.html',
                            the_title='Здесь будет описание команд',
@@ -60,7 +63,8 @@ def commands_page() -> 'html':
                            the_developer=developer,
                            the_sci_advisor=sci_adviser)
 
-def log_page(page, filename: str='requests.log') -> 'html':
+
+def log_page(page, filename: str=os.path.join(cur_dir, 'requests.log')) -> 'html':
     with open(filename, encoding='utf-8') as log:
         reader_dict = csv.DictReader(log, delimiter=';')
         log_req = []

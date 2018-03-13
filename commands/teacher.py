@@ -3,7 +3,7 @@ from common_func import keyword_gen
 from humans_db import teachers_list
 
 
-def teacher(keyword=''):
+def teacher(keyword='', user_id=''):
     message = ''
     for teacher in sorted(teachers_list, key=lambda t: t.last_name):
         if not teacher.subject:
@@ -11,7 +11,7 @@ def teacher(keyword=''):
         else:
             about = ', '.join(teacher.subject)
             other_post = [post for post in teacher.post if post != 'учитель']
-            if other_post != []:
+            if other_post:
                 about += ', ' + ', '.join(other_post)
         message += '{} - {}\n'.format(teacher.name, about)
     return message, ''

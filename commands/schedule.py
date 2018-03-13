@@ -10,7 +10,8 @@ def get_daily_schedule(week_day):
         lessons += '{}. {}\n'.format(lesson[0], subject)
     return lessons
 
-def get_schedule(keyword=''):
+
+def get_schedule(keyword='', user_id=''):
     time_now = TimeNow()
     if keyword in keyword_gen('расписание','расп'):
         message = '\n\n'.join([get_daily_schedule(week_day) for week_day in range(7)])
